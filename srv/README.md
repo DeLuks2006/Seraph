@@ -5,6 +5,7 @@
 
 compile code - `go build`
 run code - `go run src/main.go`
+add dependencies - `go get .`
 
 ## Endpoints
 `/reg` - register new agent (hostname, ip, ) - POST
