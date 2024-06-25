@@ -11,7 +11,7 @@ Well the Seraphim is a angel with 6 wings and my rootkit (should support) suppor
 
 1. Hiding Files
 2. Hiding Processes
-3. Hiding Network Activity
+3. Blend in to network
 4. Injecting Shellcode into User Mode Processes
 5. C2 Beacon Communication (only for my custom mini-c2 server)
 6. Keylogging
