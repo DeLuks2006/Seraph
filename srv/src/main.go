@@ -126,6 +126,37 @@ func postTask(c *gin.Context) {
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "did not find user with specified name"})
 }
 
+func getResults(c *gin.Context) {
+  user := c.Param("name")
+  
+  for _, a := range results {
+    if a.Name == user {
+      c.IndentedJSON(http.StatusOK, a)
+      return
+    }
+  }
+  c.IndentedJSON(http.StatusNotFound, gin.H{"message": "user not found or no tasks found"})
+}
+
+func postResults(c *gin.Context) {
+  var newResult result 
+  user := c.Param("name")
+
+  for _, a := range users {
+    if a.Name == user {
+      if err := c.BindJSON(&newResult); err != nil {
+        c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "failed to add results"})
+        return
+      }
+      newResult.Name = user
+      results = append(results, newResult)
+      c.IndentedJSON(http.StatusCreated, gin.H{"message": "added new result"})
+      return
+    }
+  }
+  c.IndentedJSON(http.StatusNotFound, gin.H{"message":"did not find user with specified name"})
+}
+
 func main() {
 	var IP string
 	var Port string
@@ -143,10 +174,8 @@ func main() {
 	router.GET("/users/:name", getUserByName)
 	router.GET("/tasks/:name", fetchTasks)
 	router.POST("/tasks/:name", postTask)
-	/*
-		router.GET("/results/:name", getResults)
-		router.POST("/results/:name", postResults)
-	*/
+	router.GET("/results/:name", getResults)
+	router.POST("/results/:name", postResults)
 	router.Run(IP + ":" + Port)
 }
 
