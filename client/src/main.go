@@ -20,7 +20,6 @@ func clears() {
 GET   /users/<user>
 GET   /tasks/<user>
 GET   /results/<user>
-POST  /tasks/<user>
 */
 func getUsers(Link string){
   resp, err := http.Get(Link+"/users")
@@ -41,7 +40,6 @@ func getUsers(Link string){
 func addTask(url string, name string, id int, arg1 string, arg2 string) {
   endp := url + "/tasks/" + name
   
-  // Define a struct to represent the task data
   type task struct {
   	Name string `json:"name"`
   	ID   int    `json:"id"`
@@ -49,7 +47,6 @@ func addTask(url string, name string, id int, arg1 string, arg2 string) {
   	Arg2 string `json:"arg2"`
   }
   
-  // Create a task instance with the provided arguments
   taskData := task{
   	Name: name,
   	ID:   id,
