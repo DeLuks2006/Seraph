@@ -92,7 +92,7 @@ func main() {
   Link := "http://"
   
   fmt.Println("---------[ Command & Control Client ]---------")
-  
+  // TODO: add config file to make this less annoying
   fmt.Print("Server IP: ")
   fmt.Scanln(&IP)
   fmt.Print("Server Port: ")
@@ -116,7 +116,10 @@ func main() {
     case 4:
       fmt.Print(" > Username: ")
       fmt.Scanln(&name)
-      // TODO: ADD MENU WITH EACH CORRESPONDING ID
+      fmt.Println("1 > Keylogging on/off")
+      fmt.Println("2 > Hide/Show File")
+      fmt.Println("3 > Hide/Show Process")
+      fmt.Println("4 > Inject into process <PID> <PAYLOAD>\n")
       fmt.Print(" > ID: ")
       fmt.Scanln(&id)
       fmt.Print(" > 1st Argument (Opt.): ")
