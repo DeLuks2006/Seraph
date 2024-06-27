@@ -162,7 +162,8 @@ func main() {
 	var Port string
 
 	fmt.Println("---------[ Command & Control Server ]---------")
-	fmt.Print("Host IP: ")
+  // TODO: add config file to make this less annoying
+  fmt.Print("Host IP: ")
 	fmt.Scanln(&IP)
 	fmt.Print("Host Port: ")
 	fmt.Scanln(&Port)

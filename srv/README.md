@@ -12,6 +12,10 @@ add dependencies - `go get .`
 `/task/<name>` - fetch all tasks for agents (name) - GET
 `/result/<name>` - fetch/upload results from agents (name) - POST
 
+## TODO
+
+- [ ] Add mini-config file to make logon less annoying
+
 ## ...
 
 More to come in the future...
