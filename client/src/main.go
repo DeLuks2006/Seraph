@@ -8,6 +8,8 @@ import (
   "os"
   "bytes"
   "encoding/json"
+  "strings"
+  "bufio"
 )
 
 func clears() {
@@ -135,17 +137,43 @@ func main() {
   Link := "http://"
   
   fmt.Println("---------[ Command & Control Client ]---------")
-  // TODO: add config file to make this less annoying
-  fmt.Print("Server IP: ")
-  fmt.Scanln(&IP)
-  fmt.Print("Server Port: ")
-  fmt.Scanln(&Port)
+  
+  config := "conf/network.conf"
+
+  if _, err := os.Stat(config); os.IsNotExist(err) {
+    fmt.Print("Server IP: ")
+    fmt.Scanln(&IP)
+    fmt.Print("Server Port: ")
+    fmt.Scanln(&Port)
+  } else {
+    file, err := os.Open(config)
+    if err != nil {
+      fmt.Println("Error opening file:", err)
+      return
+    }
+    defer file.Close()
+
+    scanner := bufio.NewScanner(file)
+    for scanner.Scan() {
+      line := scanner.Text()
+      if strings.HasPrefix(line, "IP:") {
+        IP = strings.TrimSpace(strings.TrimPrefix(line, "IP:"))
+      } else if strings.HasPrefix(line, "Port:") {
+        Port = strings.TrimSpace(strings.TrimPrefix(line, "Port:"))
+      }
+    }
+
+    if err := scanner.Err(); err != nil {
+      fmt.Println("Error reading file:", err)
+      return
+    }
+  }
   
   Link += IP + ":" + Port
   for ;; {
     clears();
     fmt.Println("1 > List all users")               // WORKS
-    fmt.Println("2 > Show specifc user")
+    fmt.Println("2 > Show specific user")
     fmt.Println("3 > Show results of specific user")
     fmt.Println("4 > Add new task to queue")        // WORKS
     fmt.Println("5 > Show tasks in queue\n")
