@@ -15,6 +15,7 @@ add dependencies - `go get .`
 ## TODO
 
 - [ ] Add mini-config file to make logon less annoying
+- [ ] Add functionality to remove finished tasks
 
 ## ...
 
