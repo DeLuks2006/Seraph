@@ -4,10 +4,10 @@
 <h2 align=center>Features</h2>
 
 - [X] fetch all users 
-- [ ] fetch specific user
-- [ ] fetch results
+- [X] fetch specific user
+- [X] fetch results
 - [X] add new task to user
-- [ ] show tasks from user
+- [X] show tasks from user
 - [ ] add mini-config file to skip the server config
-
+- [ ] optimise functions (because 3 functions do basically the same thing)
 more to come...

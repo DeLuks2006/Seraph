@@ -15,12 +15,7 @@ func clears() {
   cmd.Stdout = os.Stdout
   cmd.Run()
 }
-// TODO: 
-/*
-GET   /users/<user>
-GET   /tasks/<user>
-GET   /results/<user>
-*/
+
 func getUsers(Link string){
   resp, err := http.Get(Link+"/users")
   if err != nil {
@@ -78,6 +73,54 @@ func addTask(url string, name string, id int, arg1 string, arg2 string) {
   fmt.Println(string(body))
 }
 
+func getSpecific(Link string, name string) {
+  endpoint := Link + "/users/" + name
+  resp, err := http.Get(endpoint)
+  if err != nil {
+    fmt.Println("Error sending request")
+    return
+  }
+
+  body, err := ioutil.ReadAll(resp.Body)
+  if err != nil {
+    fmt.Println("Error reading message")
+    return
+  }
+  fmt.Println(string(body))
+}
+
+func getTasks(Link string, name string) {
+  endpoint := Link + "/tasks/" + name 
+  resp, err := http.Get(endpoint)
+  if err != nil {
+    fmt.Println("Error sending request")
+    return
+  }
+
+  body, err := ioutil.ReadAll(resp.Body)
+  if err != nil {
+    fmt.Println("Error reading message")
+    return
+  }
+  fmt.Println(string(body))
+}
+
+func getResults(Link string, name string) {
+  endpoint := Link + "/results/" + name 
+  resp, err := http.Get(endpoint)
+  if err != nil {
+    fmt.Println("Error sending request")
+    return
+  }
+
+  body, err := ioutil.ReadAll(resp.Body)
+  if err != nil {
+    fmt.Println("Error reading message")
+    return
+  }
+  fmt.Println(string(body))
+}
+
 func main() {
   var IP string
   var Port string
@@ -112,6 +155,9 @@ func main() {
     case 1:
       getUsers(Link)
     case 2:
+      fmt.Print(" > Enter username: ")
+      fmt.Scanln(&name)
+      getSpecific(Link, name)
     case 3:
     case 4:
       fmt.Print(" > Username: ")
