@@ -75,14 +75,13 @@ func addTask(url string, name string, id int, arg1 string, arg2 string) {
   fmt.Println(string(body))
 }
 
-func getSpecific(Link string, name string) {
-  endpoint := Link + "/users/" + name
+func getStuff(Link string, name string, endp string) {
+  endpoint := Link + endp + name
   resp, err := http.Get(endpoint)
   if err != nil {
     fmt.Println("Error sending request")
     return
   }
-
   body, err := ioutil.ReadAll(resp.Body)
   if err != nil {
     fmt.Println("Error reading message")
@@ -90,39 +89,6 @@ func getSpecific(Link string, name string) {
   }
   fmt.Println(string(body))
 }
-
-func getTasks(Link string, name string) {
-  endpoint := Link + "/tasks/" + name 
-  resp, err := http.Get(endpoint)
-  if err != nil {
-    fmt.Println("Error sending request")
-    return
-  }
-
-  body, err := ioutil.ReadAll(resp.Body)
-  if err != nil {
-    fmt.Println("Error reading message")
-    return
-  }
-  fmt.Println(string(body))
-}
-
-func getResults(Link string, name string) {
-  endpoint := Link + "/results/" + name 
-  resp, err := http.Get(endpoint)
-  if err != nil {
-    fmt.Println("Error sending request")
-    return
-  }
-
-  body, err := ioutil.ReadAll(resp.Body)
-  if err != nil {
-    fmt.Println("Error reading message")
-    return
-  }
-  fmt.Println(string(body))
-}
-
 func main() {
   var IP string
   var Port string
@@ -185,8 +151,11 @@ func main() {
     case 2:
       fmt.Print(" > Enter username: ")
       fmt.Scanln(&name)
-      getSpecific(Link, name)
+      getStuff(Link, name, "/users/")
     case 3:
+      fmt.Print(" > Enter username: ")
+      fmt.Scanln(&name)
+      getStuff(Link, name, "/results/")
     case 4:
       fmt.Print(" > Username: ")
       fmt.Scanln(&name)
@@ -202,6 +171,9 @@ func main() {
       fmt.Scanln(&arg2)
       addTask(Link, name, id, arg1, arg2)
     case 5:
+      fmt.Print(" > Enter username: ")
+      fmt.Scanln(&name)
+      getStuff(Link, name, "/tasks/")
     default:
       fmt.Println("[x] Invalid Option!")
     }

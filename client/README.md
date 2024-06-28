@@ -8,6 +8,6 @@
 - [X] fetch results
 - [X] add new task to user
 - [X] show tasks from user
-- [ ] add mini-config file to skip the server config
-- [ ] optimise functions (because 3 functions do basically the same thing)
+- [X] add mini-config file to skip the server config
+- [X] optimise functions (because 3 functions do basically the same thing)
 more to come...
