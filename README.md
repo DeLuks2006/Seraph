@@ -4,7 +4,9 @@ Seraph
 <p align=center>The good ol' 6 winged Ring 0 Rootkit</p>
 
 <h2 align=center>Description</h2>
-...
+
+> [!IMPORTANT]
+> development of rootkit currently paused as to me actually havivng to learn kernel development lol
 
 <h2 align=center>Whats up with the name?</h2>
 Well the Seraphim is a angel with 6 wings and my rootkit (should support) supports the following six features:
