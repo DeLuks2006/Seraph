@@ -1,0 +1,10 @@
+TARGETNAME=Seraph
+TARGETPATH=OBJ
+TARGETTYPE=DRIVER
+SOURCEDIR=src\
+# temporary
+SOURCES=$(SOURCEDIR)\proc\main.c \
+        $(SOURCEDIR)\file\main.c \
+        $(SOURCEDIR)\logs\main.c
+# also temporary (TODO: find ndis on the system)
+TARGETLIBS=$(DDK_LIB_PATH)\ndis.lib

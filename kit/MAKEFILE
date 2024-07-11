@@ -1,0 +1,25 @@
+!INCLUDE $(NTMAKEENV)\makefile.def
+# to make just use "checked-build environment"
+
+
+# --- ALTERNATIVE ---
+# TARGET = HelloDriver
+# CC = cl
+# LD = link
+# CFLAGS = /c /Zi
+# LFLAGS = /DEBUG
+#
+# SRCS = HelloDriver.c
+# OBJS = $(SRCS:.c=.obj)
+# 
+# all: $(TARGET).sys
+#
+# $(TARGET).obj: $(SRCS)
+#  $(CC) $(CFLAGS) $^
+# 
+# $(TARGET).sys: $(OBJS)
+#  $(LINK) $(LFLAGS) /DRIVER $^
+#
+# clean:
+#  del *.obj
+#  del *.sys
