@@ -125,6 +125,7 @@ TODO:
   background-color: #2a2a2c;
   grid-column: span 5;
   grid-row: span 1;
+  min-height: 150px;
 }
 
 .box3 {
