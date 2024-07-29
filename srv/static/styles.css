@@ -109,6 +109,19 @@ TODO:
   flex-grow: 1;
 }
 
+@media (max-width:480px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: auto; /* Control number of rows and row sizes */
+    grid-gap: 12px;
+    padding: 16px;
+    padding-top: 122px;
+    border-radius: 16px;
+    flex-grow: 1;
+  }
+}
+
 .box {
   border: 1px transparent;
   border-radius: 8px;
