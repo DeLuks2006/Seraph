@@ -6,10 +6,10 @@ body {
   margin:0;
   padding:0;
   display:flex;
-  justify-content:center;
-  align-items:center;
+  flex-direction: column;
   height: 100vh;
-  overflow:hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 /*
@@ -47,7 +47,7 @@ TODO:
   width: 100%;
   height: 50%;
   background: linear-gradient(180deg, transparent, rgba(74, 83, 206, 0.5));
-  transition: top 0.8s ease-in-out;
+  transition: top 0.4s ease-in-out;
 }
 
 .button-secondary:hover::before {
@@ -55,16 +55,12 @@ TODO:
 }
 
 .navbar {
-    width: 100%;
-    flex-grow:1;
-    height: 8vh;
+    height: 106px;
     background-color: #1f1f21;
     padding: 0;
     text-align: center;
     position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+    width: 100%;
 }
 
 .navbar .title {
@@ -106,22 +102,19 @@ TODO:
 .grid-container {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(6, 1fr); /* Control number of rows and row sizes */
+  grid-template-rows: auto; /* Control number of rows and row sizes */
   grid-gap: 6px;
-  max-width: 1000px; /* Adjust max-width to control the overall grid size */
-  width: 100%;
-  height: 90vh;
   padding: 16px;
-  padding-top: 10vh;
+  padding-top: 122px;
   border-radius: 8px;
-  margin: 48px auto;
+  min-height: 800px;
+  flex-grow: 1;
 }
 
 .box {
   border: 1px transparent;
   border-radius: 8px;
   min-height: 144px;
-  max-height: 144px; /* Set max-height to prevent auto-sizing */
   padding: 32px;
 }
 
