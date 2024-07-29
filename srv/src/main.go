@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
   "os"
+  "os/user"
   "bufio"
   "strings"
 
@@ -165,6 +166,13 @@ func main() {
   var Port string
   config := "conf/network.conf"
   
+  currUser, err := user.Current()
+  if err != nil {
+    fmt.Println("Failed to fetch current user")
+    return
+  }
+  attckr := currUser.Username 
+
   fmt.Println("---------[ Command & Control Server ]---------")
   
   if _, err := os.Stat(config); os.IsNotExist(err) {
@@ -198,6 +206,11 @@ func main() {
   
   /*---------[ HTTP STUFF ]---------*/
   router := gin.Default()
+  router.LoadHTMLGlob("../templates/*")
+  router.Static("../static", "./static")
+  router.GET("/", func(c* gin.Context) {
+    c.HTML(http.StatusOK, "index.html", gin.H{"name":attckr,})
+  })
   router.GET("/users", getUsers)
   router.POST("/users", addUser)
   router.GET("/users/:name", getUserByName)

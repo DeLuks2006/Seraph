@@ -1,0 +1,193 @@
+body {
+  background:#19191c;
+  font-family:"Roboto";
+
+  /*BENTO GRID STUFF*/
+  margin:0;
+  padding:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height: 100vh;
+  overflow:hidden;
+}
+
+/*
+TODO:
+- button primary
+- select 
+- Title 
+- Box adjust
+*/
+
+.button-primary {
+  background-color: #4a53ce;
+  border: 1px solid #4a508e;
+  border-radius: 15px;
+  color:white;
+  cursor:pointer;
+}
+
+.button-secondary {
+  background-color: rgba(31, 31, 33, 0.5);
+  border: 1px solid #4a53ce;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.5s ease-in-out;
+}
+
+.button-secondary::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(180deg, transparent, rgba(74, 83, 206, 0.5));
+  transition: top 0.8s ease-in-out;
+}
+
+.button-secondary:hover::before {
+  top: 50%;
+}
+
+.navbar {
+    width: 100%;
+    flex-grow:1;
+    height: 8vh;
+    background-color: #1f1f21;
+    padding: 0;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navbar .title {
+  margin-top:6px;
+  margin-bottom:2px;
+}
+
+.navbar .text {
+  margin-top:0;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.title {
+  color:#fff;
+  font-size:52px;
+}
+
+.text {
+  color:#8c8c8e
+}
+/*----------------------------------------*/
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(6, 1fr); /* Control number of rows and row sizes */
+  grid-gap: 6px;
+  max-width: 1000px; /* Adjust max-width to control the overall grid size */
+  width: 100%;
+  height: 90vh;
+  padding: 16px;
+  padding-top: 10vh;
+  border-radius: 8px;
+  margin: 48px auto;
+}
+
+.box {
+  border: 1px transparent;
+  border-radius: 8px;
+  min-height: 144px;
+  max-height: 144px; /* Set max-height to prevent auto-sizing */
+  padding: 32px;
+}
+
+.box1 {
+  background-color: #303033;
+  grid-column: span 3;
+  grid-row: span 1;
+}
+
+.box2 {
+  background-color: #2a2a2c;
+  grid-column: span 5;
+  grid-row: span 1;
+}
+
+.box3 {
+  background-color: #2a2a2c;
+  grid-column: span 5;
+  grid-row: span 2; /* Make this box taller */
+  max-height: 296px; /* Adjust height accordingly */
+}
+
+.box4 {
+  background-color: #303033;
+  grid-column: span 3;
+  grid-row: span 2; /* Make this box taller */
+  max-height: 296px; /* Adjust height accordingly */
+}
+
+.box5 {
+  background-color: #2a2a2c;
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.box6 {
+  background-color: #303033;
+  grid-column: span 3;
+  grid-row: span 1;
+}
+
+.box7 {
+  background-color: #2a2a2c;
+  grid-column: span 3;
+  grid-row: span 1;
+}
+
+.box7 form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 8px;
+}
+
+.box7 form :is(input, select) {
+  padding: 5px;
+  border-radius: 4px;
+  background-color: #19191a;
+  color: white;
+  border: none;
+}
+
+.box7 form button {
+  padding: 9px 0;
+}
+
+.box7 input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}

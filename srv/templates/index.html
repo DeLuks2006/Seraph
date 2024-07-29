@@ -1,0 +1,59 @@
+<!-- 
+BG1 #19191c
+BG2 #1f1f21
+BG3 #2a2a2c
+BG4 #303033
+TXT #ffffff #8c8c8e
+
+BENTO-BOX (bento-grids.com)
+-->
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div>
+        <h1 class="title">Hello, {{ .name }}!</h1>
+        <p class="text">Welcome to the Seraph Rootkit Dashboard.</p>
+      </div>
+    </nav>
+        <div class="grid-container">
+          <div class="box box1">
+            <h1 class="title" style="margin:0">Users Online:</h1>
+            <h1 class="title" style="color:#4a53ce;margin:0;">168</h1>
+          </div>
+        <div class="box box2">User Data in a nice grid layout here</div>
+        <div class="box box3">Loot</div>
+        <div class="box box4">Get Loot of specific user
+          <button type="submit" class="button_primary">Submit</button>
+        </div>
+        <div class="box box5">
+          <h1 class="title">Queued Tasks:</h1>
+        </div>
+        <div class="box box6">List of active tasks in nice layout</div>
+        <div class="box box7">
+          <h2 class="title" style="margin:0;padding:0">Add Task:</h2>
+          <form id="addtask" style="width:100%">
+            <input type="text" name="uname" placeholder="username">
+            <select>
+              <option value="" disabled selected>Option</option>
+              <option value=1>Toggle Keylogger</option>
+              <option value=2>Hide/Show File</option>
+              <option value=3>Hide/Show Process</option>
+              <option value=4>Inject into Process</option>
+            </select>
+            <input type="text" name="arg1" placeholder="Arg1">
+            <input type="text" name="arg2" placeholder="Arg2">
+            <button type="submit" onclick="dosomething()" class="button-secondary">
+              Submit
+            </button>
+          </form>
+        </div>
+    </div>
+  </body>
+</html>
