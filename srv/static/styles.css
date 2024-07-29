@@ -107,14 +107,12 @@ TODO:
   padding: 16px;
   padding-top: 122px;
   border-radius: 8px;
-  min-height: 800px;
   flex-grow: 1;
 }
 
 .box {
   border: 1px transparent;
   border-radius: 8px;
-  min-height: 144px;
   padding: 32px;
 }
 
