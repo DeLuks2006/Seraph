@@ -14,7 +14,6 @@ body {
 
 /*
 TODO:
-- button primary
 - select 
 - Title 
 - Box adjust
@@ -103,10 +102,10 @@ TODO:
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: auto; /* Control number of rows and row sizes */
-  grid-gap: 6px;
+  grid-gap: 12px;
   padding: 16px;
   padding-top: 122px;
-  border-radius: 8px;
+  border-radius: 16px;
   flex-grow: 1;
 }
 
