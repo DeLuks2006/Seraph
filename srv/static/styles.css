@@ -131,14 +131,14 @@ TODO:
   background-color: #2a2a2c;
   grid-column: span 5;
   grid-row: span 2; /* Make this box taller */
-  max-height: 296px; /* Adjust height accordingly */
+  min-height: 300px;
 }
 
 .box4 {
   background-color: #303033;
   grid-column: span 3;
   grid-row: span 2; /* Make this box taller */
-  max-height: 296px; /* Adjust height accordingly */
+  min-height: 300px;
 }
 
 .box5 {
