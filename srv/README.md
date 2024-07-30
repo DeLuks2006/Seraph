@@ -8,9 +8,10 @@ run code - `go run main.go`
 add dependencies - `go get .`
 
 ## Endpoints
-- `/reg` - register new agent (hostname, ip, ) - POST
-- `/task/<name>` - fetch all tasks for agents (name) - GET
-- `/result/<name>` - fetch/upload results from agents (name) - POST
+- `/users` - register user or list all users - POST/GET
+- `/users/<name>` - get data for specific user - GET
+- `/task/<name>` - add or fetch all tasks for agents (name) - POST/GET
+- `/result/<name>` - fetch/upload results from agents (name) - POST/GET
 
 ## TODO
 
