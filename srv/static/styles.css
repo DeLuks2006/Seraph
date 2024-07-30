@@ -125,17 +125,6 @@ select {
   flex-grow: 1;
 }
 
-@media (max-width:480px) {
-  .grid-container {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .box {
-    grid-column: span 1;
-    min-height: 100px;
-    min-width: 460px;
-  }
-}
-
 .box {
   border: 1px solid #30303c;
   border-radius: 8px;
