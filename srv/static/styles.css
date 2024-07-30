@@ -1,3 +1,7 @@
+* {
+  margin:0;
+}
+
 body {
   background:#19191c;
   font-family:"Roboto";
@@ -18,7 +22,6 @@ input {
   background-color: #19191a;
   color: white;
   border: none;
-  margin: 8px;
 }
 
 select {
@@ -27,7 +30,6 @@ select {
   background-color: #19191a;
   color: white;
   border: none;
-  margin: 8px;
 }
 
 .button-primary {
@@ -37,7 +39,7 @@ select {
   color:white;
   cursor:pointer;
   padding: 9px 0;
-  margin: 8px;
+  margin: 8px 0;
 }
 
 .button-secondary {
@@ -49,7 +51,7 @@ select {
   position: relative;
   overflow: hidden;
   transition: background 0.5s ease-in-out;
-  margin: 8px;
+  margin: 8px 0;
 }
 
 .button-secondary::before {
@@ -137,13 +139,17 @@ select {
 .box {
   border: 1px solid #30303c;
   border-radius: 8px;
-  padding: 32px;
+  padding: 16px;
   background-color:#1f1f21;
 }
 
 .box1 {
   grid-column: span 3;
   grid-row: span 1;
+}
+
+.box1 h1 {
+  margin-top: -12px;
 }
 
 .box2 {
@@ -154,31 +160,41 @@ select {
 
 .box3 {
   grid-column: span 5;
-  grid-row: span 2; /* Make this box taller */
+  grid-row: span 2;
   min-height: 300px;
 }
 
 .box4 {
   grid-column: span 3;
-  grid-row: span 2; /* Make this box taller */
+  grid-row: span 2;
   min-height: 300px;
   display:flex;
   flex-direction:column;
 }
 
+.box4 h2 {
+  margin-top:-12px;
+}
+
 .box5 {
-  grid-column: span 2;
+  grid-column: span 1;
   grid-row: span 1;
+  display: flex;
+  align-items: center;
 }
 
 .box6 {
-  grid-column: span 3;
+  grid-column: span 4;
   grid-row: span 1;
 }
 
 .box7 {
   grid-column: span 3;
   grid-row: span 1;
+}
+
+.box7 h2 {
+  margin-top: -12px;
 }
 
 .box7 form {
