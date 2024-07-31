@@ -135,10 +135,14 @@ select {
 .box1 {
   grid-column: span 3;
   grid-row: span 1;
+  display: flex;
+  align-items: center;
 }
 
 .box1 h1 {
-  margin-top: -12px;
+  /*margin-top: -12px;*/
+  display: flex;
+  align-items: center;
 }
 
 .box2 {

